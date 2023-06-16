@@ -9,7 +9,6 @@ import {
 
 const initialState = {
   isLoading: false,
-
   user: getUserFromLocalStorage(),
 };
 
@@ -18,14 +17,12 @@ export const registerUser = createAsyncThunk(
   async (user, thunkAPI) => {
     try {
       const resp = await customFetch.post('/auth/register', user);
-
       return resp.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data.msg);
     }
   }
 );
-
 export const loginUser = createAsyncThunk(
   'user/loginUser',
   async (user, thunkAPI) => {
@@ -37,7 +34,6 @@ export const loginUser = createAsyncThunk(
     }
   }
 );
-
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -56,7 +52,6 @@ const userSlice = createSlice({
       state.isLoading = false;
       toast.error(payload);
     },
-
     [loginUser.pending]: state => {
       state.isLoading = true;
     },

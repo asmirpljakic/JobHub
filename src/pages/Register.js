@@ -12,9 +12,11 @@ const initialState = {
   password: '',
   isMember: true,
 };
+
 const Register = () => {
   const [values, setValues] = useState(initialState);
   const { user, isLoading } = useSelector(store => store.user);
+
   const dispatch = useDispatch();
   const handleChange = e => {
     const name = e.target.name;
@@ -34,6 +36,7 @@ const Register = () => {
     }
     dispatch(registerUser({ name, email, password }));
   };
+
   const toggleMember = () => {
     setValues({ ...values, isMember: !values.isMember });
   };
@@ -41,6 +44,7 @@ const Register = () => {
     <Wrapper className='full-page'>
       <form className='form' onSubmit={onSubmit}>
         <Logo />
+
         <h3>{values.isMember ? 'Login' : 'Register'}</h3>
         {!values.isMember && (
           <FormRow
@@ -62,7 +66,7 @@ const Register = () => {
           value={values.password}
           handleChange={handleChange}
         />
-        <button type='submit' className='btn btn-block'>
+        <button type='submit' className='btn btn-block' disabled={isLoading}>
           submit
         </button>
         <p>

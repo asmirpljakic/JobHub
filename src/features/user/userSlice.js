@@ -9,6 +9,7 @@ import {
 
 const initialState = {
   isLoading: false,
+  isSidebarOpen: false,
   user: getUserFromLocalStorage(),
 };
 
@@ -17,12 +18,14 @@ export const registerUser = createAsyncThunk(
   async (user, thunkAPI) => {
     try {
       const resp = await customFetch.post('/auth/register', user);
+
       return resp.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data.msg);
     }
   }
 );
+
 export const loginUser = createAsyncThunk(
   'user/loginUser',
   async (user, thunkAPI) => {
@@ -34,9 +37,15 @@ export const loginUser = createAsyncThunk(
     }
   }
 );
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
+  reducers: {
+    toggleSidebar: state => {
+      state.isSidebarOpen = !state.isSidebarOpen;
+    },
+  },
   extraReducers: {
     [registerUser.pending]: state => {
       state.isLoading = true;
@@ -52,6 +61,7 @@ const userSlice = createSlice({
       state.isLoading = false;
       toast.error(payload);
     },
+
     [loginUser.pending]: state => {
       state.isLoading = true;
     },
@@ -69,4 +79,5 @@ const userSlice = createSlice({
   },
 });
 
+export const { toggleSidebar } = userSlice.actions;
 export default userSlice.reducer;

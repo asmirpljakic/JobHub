@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { toggleSidebar } from '../features/user/userSlice';
 
 const SmallSidebar = () => {
-
   const { isSidebarOpen } = useSelector(store => store.user);
   const dispatch = useDispatch();
   const toggle = () => {

@@ -27,7 +27,6 @@ const SmallSidebar = () => {
           <header>
             <Logo />
           </header>
-
           <div className='nav-links'>
             {links.map(link => {
               const { text, path, id, icon } = link;

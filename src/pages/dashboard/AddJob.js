@@ -17,15 +17,14 @@ const AddJob = () => {
     isEditing,
     editJobId,
   } = useSelector(store => store.job);
+
   const handleSubmit = e => {
     e.preventDefault();
-
     if (!position || !company || !jobLocation) {
       toast.error('Please fill out all fields!');
       return;
     }
   };
-
   const handleJobInput = e => {
     const name = e.target.name;
     const value = e.target.value;
